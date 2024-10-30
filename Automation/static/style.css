@@ -1,0 +1,300 @@
+/* คลื่น Gradient ที่เคลื่อนไหวช้าลง */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    animation: waveBg 120s infinite ease-in-out; /* เพิ่มระยะเวลาเพื่อให้เคลื่อนไหวช้าลง */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+
+    /* Gradient หลายชั้นในโทนสีเข้ม */
+    background: linear-gradient(145deg, 
+        rgba(0, 40, 45, 0.8) 0%, 
+        rgba(0, 30, 35, 0.6) 50%, 
+        rgba(10, 50, 55, 0.8) 100%);
+
+    background-size: 1000% 1000%; /* ขนาดพื้นหลังใหญ่ขึ้น */
+    background-blend-mode: overlay;
+    transition: background 1s ease;
+}
+
+@keyframes waveBg {
+    0% {
+        background-position: 0% 0%;
+    }
+    10% {
+        background-position: 10% 0%; /* เคลื่อนที่ช้าๆ */
+    }
+    30% {
+        background-position: 30% 0%; /* เคลื่อนที่ต่อเนื่อง */
+    }
+    50% {
+        background-position: 50% 50%; /* เคลื่อนที่ไปทางล่างขวา */
+    }
+    70% {
+        background-position: 70% 100%; /* เคลื่อนที่ไปทางล่าง */
+    }
+    90% {
+        background-position: 90% 0%; /* เคลื่อนที่กลับขึ้นไป */
+    }
+    100% {
+        background-position: 0% 0%; /* กลับสู่จุดเริ่มต้น */
+    }
+}
+
+.image-container {
+    margin-left: 120px;
+}
+/* กล่องหลัก */
+.container {
+    width: 100%;
+    max-width: 1000px; /* ปรับขนาดใหญ่ขึ้น */
+    background-color: #F3E9D2; /* สีครีมอ่อน */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    border: 5px solid #356F73; /* ขอบสีเขียวอมฟ้า */
+}
+
+/* หัวข้อ */
+h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #ED6A5A; /* สีส้มแดง */
+    text-shadow: 2px 2px #202020cc;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+/* ฟิลด์ input */
+input[type="text"], input[type="password"] {
+    width: calc(100% - 24px); /* ปรับขนาดให้พอดีกับขอบ */
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #356F73;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    background-color: #F3E9D2; /* สีพื้นหลังครีมอ่อน */
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #ED6A5A; /* เปลี่ยนสีขอบเมื่อโฟกัส */
+    outline: none;
+    background-color: #FFF6E3; /* พื้นหลังสว่างขึ้น */
+}
+
+/* ปุ่มแสดงคำสั่ง (Show Commands) */
+.button-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* เพิ่มระยะห่างระหว่างปุ่ม */
+}
+
+.button-box form {
+    flex: 1 1 30%; /* ให้ปุ่มแต่ละปุ่มมีขนาด 30% ของแถว */
+    min-width: 150px; /* ขนาดขั้นต่ำของปุ่ม */
+    text-align: center;
+}
+
+button {
+    width: 100%; /* ให้ปุ่มเต็มความกว้างของฟอร์ม */
+    padding: 12px 20px;
+    background-color: #FFA565; /* สีส้มอ่อน */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
+button:hover {
+    background-color: #ED6A5A; /* สีส้มแดงเข้ม */
+    transform: scale(1.05);
+}
+
+/* การจัดวางปุ่มในหน้า all_config */
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+/* กล่องแสดง output */
+.output-box {
+    background-color: #F3E9D2;
+    padding: 20px;
+    margin-top: 5px; /* ปรับค่าลดลงเพื่อให้ใกล้ขึ้น */
+    border: 2px solid #356F73;
+    border-radius: 8px;
+    height: 300px; /* ขนาดความสูงที่ต้องการ */
+    width: 100%; /* ใช้ความกว้างเต็มที่ */
+    overflow-y: auto; /* แถบเลื่อนแนวตั้ง */
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+    white-space: pre-wrap;
+}
+
+.output-box h2 {
+    margin-top: -35px;
+}
+
+pre {
+    font-size: 16px;
+    color: #333;
+    margin-top: -20px; /* ปรับค่าลดลงเพื่อให้ใกล้ขึ้น */
+}
+
+
+/* ฟังก์ชันต่างๆ - เพิ่มความสวยงาม */
+.config-section {
+    background-color: #FFF4E4; /* สีพื้นหลังสำหรับฟังก์ชัน */
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.config-section h2 {
+    color: #ED6A5A; /* สีส้มแดงสำหรับหัวฟังก์ชัน */
+    margin-bottom: 10px;
+    text-align: left;
+}
+.back-container {
+    display: flex;
+    justify-content: center; /* ทำให้จัดกลางในแนวนอน */
+    align-items: flex-end; /* ทำให้จัดตรงกลางในแนวตั้ง */
+    position: absolute; /* ทำให้สามารถจัดตำแหน่งได้ */
+    bottom: 60px; /* ระยะห่างจากด้านล่าง */
+    width: 100%; /* ใช้ความกว้างเต็มที่ */
+}
+
+.special-back-button {
+    padding: 20px 40px; /* ขยายขนาดปุ่ม */
+    font-size: 18px; /* เพิ่มขนาดฟอนต์ */
+    background-color: #ED6A5A; /* สีพื้นหลังของปุ่ม */
+    color: white; /* สีข้อความ */
+    border: none; /* ไม่มีขอบ */
+    border-radius: 8px; /* มุมมน */
+    cursor: pointer; /* เปลี่ยนเคอร์เซอร์เมื่อโฮเวอร์ */
+    transition: background-color 0.3s ease; /* เพิ่มการเปลี่ยนสีพื้นหลัง */
+}
+
+.special-back-button:hover {
+    background-color: #D1495B; /* สีพื้นหลังเมื่อโฮเวอร์ */
+}
+
+/* ปุ่ม Back to Login */
+.back-button {
+    background-color: #ED6A5A;
+    color: white;
+}
+.back-button button {
+    background-color: #ED6A5A;
+}
+
+.back-button button:hover {
+    background-color: #D1495B;
+}
+
+/* ปุ่ม CLI */
+.cli-button {
+    background-color: #ad7900;
+}
+
+.back-button:hover {
+    background-color: #D1495B;
+    transform: scale(1.05);
+}
+
+/* กล่องสำหรับจัดฟอร์ม */
+.form-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* สร้าง 2 คอลัมน์ */
+    gap: 20px; /* ระยะห่างระหว่างฟอร์ม */
+    margin-bottom: 30px; /* เพิ่มระยะห่างก่อนถึง output */
+}
+
+
+.form-item {
+    background-color: #FFF4E4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    text-align: center;
+}
+
+
+.back-button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* สไตล์สำหรับการแสดง hostname */
+.hostname-display {
+    width: 100px;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 20px;
+    color:  #a54119; /* สีขาวอ่อน */
+    background-color: #f3e9cd; /* สีเขียวอมฟ้า */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.hostname-display p {
+    text-align: center;
+    font-size: 24px;
+    text-shadow: 0 1px 2px black;
+    font-weight: 600;
+}
+
+/* ปรับปรุง dropdown */
+select {
+    width: calc(100% - 24px); /* ให้ความกว้างเท่ากับ input text */
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #356F73;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    background-color: #F3E9D2; /* สีพื้นหลังครีมอ่อน */
+    appearance: none; /* ซ่อนลูกศรดั้งเดิม */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="%23356F73"><polygon points="0,0 20,0 10,10"/></svg>'); /* สร้างลูกศร */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* วางลูกศรทางด้านขวา */
+    background-size: 12px; /* ขนาดของลูกศร */
+}
+
+select:focus {
+    border-color: #ED6A5A; /* เปลี่ยนสีขอบเมื่อโฟกัส */
+    outline: none; /* ปิดการแสดงเส้นขอบ */
+    background-color: #FFF6E3; /* พื้นหลังสว่างขึ้น */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-container {
+        grid-template-columns: 1fr; /* เปลี่ยนเป็นแถวเดียวในหน้าจอขนาดเล็ก */
+    }
+
+    .output-box {
+        height: 200px; /* ลดขนาดความสูงในหน้าจอขนาดเล็ก */
+    }
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch Configuration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="hostname-display">
+        <p>{{ hostname }}</p>
+    </div>
+
+    <div class="main-container">
+        <h1>Switch Configuration</h1>
+
+        <!-- ใช้ grid layout เพื่อจัดให้ฟังก์ชันเรียงเป็นแถวละ 2 -->
+        <div class="form-container">
+            <!-- ฟอร์มที่ 1: Apply Switch Interface Config -->
+            <div class="form-item">
+                <form method="POST" action="{{ url_for('apply_switch_interface_config') }}">
+                    <h2>Add IP Interface </h2>
+                    <select id="interface" name="interface" required>
+                        <option value="" disabled selected>Select Interface</option>
+                        {% for interface in interfaces %}
+                        <option value="{{ interface }}">{{ interface }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" name="ip_address" placeholder="IP Address" required>
+                    <input type="text" name="subnet_mask" placeholder="Subnet Mask" required>
+                    <button type="submit">Apply Switch Interface Config</button>
+                </form>
+            </div>
+
+            <!-- ฟอร์มที่ 2: Add VLAN -->
+            <div class="form-item">
+                <form method="POST" action="{{ url_for('add_vlan') }}">
+                    <h2>Add VLAN</h2>
+                    <input type="text" name="vlan_id" placeholder="VLAN ID" required>
+                    <input type="text" name="vlan_name" placeholder="VLAN Name" required>
+                    <select id="interface" name="interface" required>
+                        <option value="" disabled selected>Select Interface</option>
+                        {% for interface in interfaces %}
+                        <option value="{{ interface }}">{{ interface }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Add VLAN</button>
+                </form>
+            </div>
+
+            <!-- ฟอร์มที่ 3: Add Port to VLAN -->
+            <div class="form-item">
+                <form method="POST" action="{{ url_for('add_port_to_vlan') }}">
+                    <h2>Add Port to VLAN</h2>
+                    <select id="interface" name="interface" required>
+                        <option value="" disabled selected>Select Interface</option>
+                        {% for interface in interfaces %}
+                        <option value="{{ interface }}">{{ interface }}</option>
+                        {% endfor %}
+                    </select>
+                    <select id="vlan_id" name="vlan_id"  required>
+                        <option value="" disabled selected>Select VLAN ID</option>
+                        {% for vlan_id in vlan_ids %}
+                        <option value="{{ vlan_id }}">{{ vlan_id }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Add Port to VLAN</button>
+                </form>
+            </div>
+
+            <div class="form-item">
+                <form method="POST" action="{{ url_for('remove_switch_ip_interface') }}">
+                    <h2>Remove IP Interface</h2>
+                    <select id="interface" name="interface" required>
+                        <option value="" disabled selected>Select Interface</option>
+                        {% for interface in interfaces %}
+                        <option value="{{ interface }}">{{ interface }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Remove</button>
+                </form>
+            </div>
+
+            <div class="form-item">
+                <form method="POST" action="{{ url_for('remove_vlan') }}">
+                    <h2>Remove Vlan</h2>
+                    <select id="vlan_id" name="vlan_id" required>
+                        <option value="" disabled selected>Select VLAN ID</option>
+                        {% for vlan_id in vlan_ids %}
+                        <option value="{{ vlan_id }}">{{ vlan_id }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Remove</button>
+                </form>
+            </div>
+
+            <!-- ฟอร์มที่ 4: Show Interfaces -->
+            <div class="form-item">
+                <br>
+                <form method="POST" action="{{ url_for('show_interfaces_switch') }}">
+                    <h2>Show Interfaces</h2>
+                    <button type="submit">Show IP Interfaces</button>
+                </form><br><br>
+                <form action="{{ url_for('show_vlans') }}" method="POST">
+                    <h2>Show VLANs</h2>
+                    <button type="submit">Show VLANs</button>
+                </form>
+            </div>
+
+        </div>
+            <!-- ปุ่มสำหรับกลับไปยัง All Config -->
+            <div class="form-item">
+                <a href="{{ url_for('all_config') }}"><button>Back to All Config</button></a>
+            </div>
+        <!-- กล่องสำหรับแสดง Output -->
+        <div class="output-container">
+            <div class="output-box">
+                <h2>Output:</h2>
+                <pre>{{ output }}</pre>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Commands</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="hostname-display">
+        <p>{{ hostname }}</p>
+    </div>
+
+    <div class="container">
+        <h1>Show Commands</h1>
+        <div class="button-box">
+            <form action="/show_ip_interface_brief" method="post">
+                <button type="submit">Show IP Interface Brief</button>
+            </form>
+            <form action="/show_version" method="post">
+                <button type="submit">Show Version</button>
+            </form>
+            <form action="/show_running_config" method="post">
+                <button type="submit">Show Running-config</button>
+            </form>
+            <form action="/show_startup_config" method="post">
+                <button type="submit">Show Startup-Config</button>
+            </form>
+            <form action="/show_interfaces" method="post">
+                <button type="submit">Show Interfaces</button>
+            </form>
+            <form action="/show_ip_route" method="post">
+                <button type="submit">Show IP Route</button>
+            </form>
+            <form action="/show_arp" method="post">
+                <button type="submit">Show ARP</button>
+            </form>
+            <form action="show_protocols" method="post">
+                <button type="submit">Show Protocols</button>
+            </form>
+            <form action="/show_clock" method="post">
+                <button type="submit">Show Clock</button>
+            </form>
+            <form action="/show_users" method="post">
+                <button type="submit">Show Users</button>
+            </form>
+            <form action="/show_history" method="post">
+                <button type="submit">Show History</button>
+            </form>
+            <form action="/show_vlan_brief" method="post">
+                <button type="submit">Show VLAN Brief</button>
+            </form>
+            
+        </div>
+
+        <div class="output-box">
+            <h2>Command Output</h2>
+            <pre>{{ output }}</pre>
+        </div>
+
+        <form action="/command_center" method="get">
+            <button type="submit" class="back-button">Back to Command Center</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>All Configurations</title>
+    <style>
+        /* CSS สำหรับ modal */
+        .modal {
+            display: none; /* ซ่อน modal โดยเริ่มต้น */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* พื้นหลังโปร่งใส */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .modal-buttons {
+            margin-top: 15px;
+        }
+        .modal-buttons button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .yes-button {
+            background-color: #d9534f;
+            color: white;
+        }
+        .no-button {
+            background-color: #5bc0de;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hostname-display">
+        <p>{{ hostname }}</p>
+    </div>
+    
+    <div class="container">
+        <h1>Config Options</h1>
+
+        <div class="button-container">
+            <!-- ฟอร์มที่ห่อปุ่ม Erase -->
+            <form id="eraseForm" action="{{ url_for('erase_router') }}" method="POST">
+                <button type="button" id="eraseButton" class="btn">Erase Router</button>
+            </form>
+
+            <form action="{{ url_for('conf_router') }}" method="GET">
+                <button type="submit" class="btn">Router Config</button>
+            </form>
+
+            <form action="{{ url_for('conf_switch') }}" method="GET">
+                <button type="submit" class="btn">Switch Config</button>
+            </form>
+        </div>
+
+        <!-- Modal Confirmation -->
+        <div id="eraseModal" class="modal" style="display: none;"> <!-- ปรับเป็นซ่อนตอนเริ่ม -->
+            <div class="modal-content">
+                <p>Are you sure you want to erase the router?</p>
+                <div class="modal-buttons">
+                    <button class="yes-button" id="confirmErase">Yes</button>
+                    <button class="no-button" id="cancelErase">No</button>
+                </div>
+            </div>
+        </div>
+        
+        <form action="/command_center" method="get">
+            <button type="submit" class="back-button">Back to Command Center</button>
+        </form>
+    </div>
+      <!-- JavaScript for handling modal logic -->
+    <script>
+        const eraseButton = document.getElementById('eraseButton');
+        const eraseModal = document.getElementById('eraseModal');
+        const confirmErase = document.getElementById('confirmErase');
+        const cancelErase = document.getElementById('cancelErase');
+        const eraseForm = document.getElementById('eraseForm');
+
+        // เปิด modal เมื่อกดปุ่ม Erase
+        eraseButton.onclick = function () {
+            eraseModal.style.display = 'flex';  // แสดง modal เมื่อคลิก
+        };
+
+        // ปิด modal เมื่อกดปุ่ม No
+        cancelErase.onclick = function () {
+            eraseModal.style.display = 'none';  // ซ่อน modal
+        };
+
+        // ส่งฟอร์มเมื่อกดปุ่ม Yes
+        confirmErase.onclick = function () {
+            eraseForm.submit();
+        };
+
+        // ปิด modal ถ้าคลิกข้างนอก modal-content
+        window.onclick = function (event) {
+            if (event.target === eraseModal) {
+                eraseModal.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

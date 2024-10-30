@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Automation - Command Center</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="hostname-display">
+        <p>{{ hostname }}</p>
+    </div>
+
+    <div class="container">
+        <h1>Command Center</h1>
+        <div class="button-box">
+            <form action="/show_commands" method="get">
+                <button type="submit">Show Commands</button>
+            </form>
+            <form action="/all_config" method="get">
+                <button type="submit">Configuration Commands</button>
+            </form>
+            <form action="/ip_route" method="get">
+                <button type="submit">Add IP Route</button>
+            </form>
+          <!--  <form action="/cli" method="get"> 
+                <button type="submit">CLI</button>
+            </form>-->
+        </div>
+        <br>
+    </div>
+    <div class="back-container">
+        <form action="{{ url_for('index') }}" method="GET">
+            <button class="back-button special-back-button">Logout</button>
+        </form>
+    </div>
+    
+</body>
+</html>

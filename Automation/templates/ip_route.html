@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add IP Route</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="hostname-display">
+        <p>{{ hostname }}</p>
+    </div>
+
+    <div class="container">
+        <h1>Add IP Route</h1>
+        <form action="/submit_ip_route" method="POST">
+            <label for="network">Network:</label>
+            <input type="text" id="network" name="network" required>
+            <label for="subnet_mask">Subnet Mask:</label>
+            <input type="text" id="subnet_mask" name="subnet_mask" required>
+            <label for="nexthop">Next Hop:</label>
+            <input type="text" id="nexthop" name="nexthop" required>
+            <button type="submit">Apply IP Route</button>
+        </form>
+        
+        {% if output %}
+        <div class="output-box">
+            <h2>Output</h2>
+            <pre>{{ output }}</pre>
+        </div>
+        {% endif %}
+        <br>
+        <form action="/back" method="POST">  
+            <button type="submit" class="back-button">Back to Commands</button>
+        </form>
+    </div>
+</body>
+</html>
