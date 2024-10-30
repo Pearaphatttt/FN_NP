@@ -29,9 +29,9 @@ def configure_switch(ip):
         # เข้าสู่ configuration mode และตั้งค่า VLANs
         connection.config_mode()
 
-        for vlan_id in range(2, 10):
+        for vlan_id in range(121, 140):
             connection.send_config_set([f"vlan {vlan_id}", f"name Python_VLAN_{vlan_id}"])
-
+            connection.send_config_set([f"interface vlan{vlan_id}", f"ip address 10.10.{vlan_id}.1 255.255.255.0", "no shutdown", "exit"])
         # ออกจาก configuration mode และปิดการเชื่อมต่อ
         connection.exit_config_mode()
         connection.disconnect()
