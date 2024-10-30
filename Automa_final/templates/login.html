@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Login to Device</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <div class="container">
+        <form action="/connect" method="POST">
+            <input type="text" name="ip" placeholder="IP" required>
+            <input type="text" name="username" placeholder="username" required>
+            <input type="text" name="password" placeholder="password" required>
+            <button type="submit">Connect</button>
+        </form>
+    </div>
+</body>
+</html>

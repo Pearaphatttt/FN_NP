@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- กำหนดการเข้ารหัสอักขระให้เป็น UTF-8 เพื่อรองรับตัวอักษรพิเศษ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ทำให้หน้าเว็บสามารถปรับขนาดตามอุปกรณ์ที่เปิดใช้งานได้ -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!-- ลิงก์ไปยังไฟล์ CSS เพื่อใช้ตกแต่งหน้าเว็บ -->
+    <title>All Configurations</title> <!-- ชื่อของเอกสารที่จะแสดงบนแท็บเบราว์เซอร์ -->
+    <title>Homepage</title> <!-- ชื่อของเอกสารเพิ่มเติม -->
+</head>
+<body>
+    <div class="container"> <!-- ส่วนหลักของเนื้อหาในหน้าเว็บ ใช้คลาส container สำหรับการตกแต่ง -->
+        
+        <!-- ฟอร์มสำหรับการตั้งค่า IP ของอินเทอร์เฟซบนเราเตอร์ -->
+        <form action="/config_interface_router" method='POST' >
+            <h3>Config Interface router</h3> <!-- หัวข้อย่อยที่บอกให้ผู้ใช้ตั้งค่า IP บนเราเตอร์ -->
+            <input type="text" id="interface" name="interface" placeholder="interface" required> <!-- กล่องข้อความสำหรับกรอกชื่ออินเทอร์เฟซ เช่น Ethernet0 -->
+            <input type="text" id="ip_address" name="ip_address" placeholder="ip_address" required> <!-- กล่องข้อความสำหรับกรอก IP Address -->
+            <input type="text" id="subnet_mask" name="subnet_mask" placeholder="subnet_mask" required> <!-- กล่องข้อความสำหรับกรอก Subnet Mask -->
+            <button type="submit">Apply IP Address Router</button> <!-- ปุ่มส่งข้อมูลเพื่อใช้ตั้งค่า IP Address บนเราเตอร์ -->
+        </form>
+        <br> <!-- ขึ้นบรรทัดใหม่ -->
+        
+        <!-- ฟอร์มสำหรับแสดงคำสั่ง 'show run' บนเราเตอร์ -->
+        <form action="/show_run" method="post">
+            <button type="submit">Show run</button> <!-- ปุ่มส่งคำสั่งเพื่อแสดง running configuration ของเราเตอร์ -->
+        </form>
+
+        <!-- ฟอร์มสำหรับแสดงคำสั่ง 'show ip route' -->
+        <form action="/show_iproute" method="post" style="margin-top: 18px; margin-bottom: 18px;">
+            <button type="submit">Show IP route</button> <!-- ปุ่มส่งคำสั่งเพื่อแสดง routing table ของเราเตอร์ -->
+        </form>
+
+        <!-- ฟอร์มสำหรับแสดงคำสั่ง 'show ip interface brief' -->
+        <form action="/show_ip_interface" method="post">
+            <button type="submit">Show IP interface</button> <!-- ปุ่มส่งคำสั่งเพื่อแสดงข้อมูล IP และสถานะของอินเทอร์เฟซบนเราเตอร์ -->
+        </form>
+        <br> <!-- ขึ้นบรรทัดใหม่ -->
+
+        <!-- ฟอร์มสำหรับลบ IP ของอินเทอร์เฟซ -->
+        <form action="/remove_ip_interface" method="post">
+            <input type="text" id="interface" name="interface" placeholder="interface"> <!-- กล่องข้อความสำหรับระบุชื่ออินเทอร์เฟซที่ต้องการลบ IP -->
+            <button type="submit">Remove IP Interface</button> <!-- ปุ่มส่งคำสั่งเพื่อทำการลบ IP บนอินเทอร์เฟซที่กำหนด -->
+        </form>
+
+        <!-- ฟอร์มนี้ถูกคอมเม้นท์ไว้ ไม่ได้ใช้งาน -->
+        <!-- <form action="/tracert" method="post">
+            <button type="submit">Tracert</button>
+        </form> -->
+    </div>
+
+    <!-- ฟอร์มสำหรับปิดใช้งาน (shutdown) อินเทอร์เฟซ -->
+    <form action="/shutdown_interface" method="post">
+        <input type="text" id="interface" name="interface" placeholder="interface"> <!-- กล่องข้อความระบุชื่ออินเทอร์เฟซที่จะปิด -->
+        <button type="submit">ShutDown</button> <!-- ปุ่มส่งคำสั่งเพื่อปิดการทำงานของอินเทอร์เฟซที่กำหนด -->
+    </form>
+    <br> <!-- ขึ้นบรรทัดใหม่ -->
+
+    <!-- ฟอร์มสำหรับเปิดใช้งาน (no shutdown) อินเทอร์เฟซ -->
+    <form action="/noshutdown_interface" method="post">
+        <input type="text" id="interface" name="interface" placeholder="interface"> <!-- กล่องข้อความระบุชื่ออินเทอร์เฟซที่จะเปิดใช้งาน -->
+        <button type="submit">No ShutDown</button> <!-- ปุ่มส่งคำสั่งเพื่อเปิดการทำงานของอินเทอร์เฟซที่กำหนด -->
+    </form>
+    <br> <!-- ขึ้นบรรทัดใหม่ -->
+
+    <!-- ฟอร์มสำหรับตั้งค่า IP Route -->
+    <form action="/ip_route" method="post">
+        <input type="text" id="network" name="network" placeholder="network"> <!-- กล่องข้อความสำหรับกรอก network ที่จะกำหนด route -->
+        <input type="text" id="subnet_mask" name="subnet_mask" placeholder="subnet_mask"> <!-- กล่องข้อความสำหรับกรอก subnet mask ของ network -->
+        <input type="text" id="next_hop" name="next_hop" placeholder="next_hop"> <!-- กล่องข้อความสำหรับกรอก next hop หรือ gateway -->
+        <button type="submit">Submit IP Route</button> <!-- ปุ่มส่งคำสั่งเพื่อเพิ่ม static route ไปยัง network ที่กำหนด -->
+    </form>
+
+    <!-- กล่องแสดงผลลัพธ์คำสั่งที่ผู้ใช้ทำการรัน -->
+    <div class="output-box">
+        <h2>Command Output</h2> <!-- หัวข้อย่อยสำหรับกล่องแสดงผลลัพธ์ -->
+        <pre>{{ output }}</pre> <!-- แสดงผลลัพธ์คำสั่งจากฝั่งเซิร์ฟเวอร์ในรูปแบบจัดเรียงเพื่ออ่านง่าย -->
+    </div>
+
+</body>
+</html>
